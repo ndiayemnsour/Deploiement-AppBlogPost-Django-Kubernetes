@@ -19,7 +19,21 @@ Une application web de publication développée avec Django, conteneurisée avec
 - Mise a jour category
 
 ## 📁 Structure du projet
-├── Deploiement-App-Django-kubernetes/ ├── manage.py ├── requirements.txt ├── .gitignore ├──README.md ├── Dockerfile ├── kubernetes/ │ ├── deployment.yaml │ ├── service.yaml │ └── ingress.yaml
+├── Deploiement-App-Django-kubernetes/ 
+    ├── manage.py 
+    ├── requirements.txt 
+    ├──.gitignore 
+    ├──README.md 
+    ├── Dockerfile 
+    ├── kubernetes/ 
+        │ 
+        ├── deployment.yaml 
+        ├── configmap.yaml 
+        ├── service.yaml 
+        ├── hpa.yaml 
+        ├── pvc.yaml 
+        │ 
+        └── ingress.yaml
 
 ## Installation
 
@@ -31,21 +45,25 @@ source .venv/bin/activate  # ou .venv\Scripts\activate sur Windows
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
-
+```
 ###Dockerisation
 ####Construire l’image
+```bash
 docker build -t mon-utilisateur/Deploiement-App-Django-kubernetes 
 docker run -p 8000:8000 mon-utilisateur/Deploiement-App-Django-kubernetes
-
+```
 ###Déploiement sur Kubernetes
 ####Appliquer les fichiers YAML :
+```bash
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 kubectl apply -f k8s/ingress.yaml
+```
 ####Vérifier les ressources
+```bash
 kubectl get pods
 kubectl get services
 kubectl get ingress
-
+```
 
 
