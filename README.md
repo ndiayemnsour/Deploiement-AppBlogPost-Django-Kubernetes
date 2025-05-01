@@ -46,20 +46,20 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
-###Dockerisation
-####Construire l’image
+##Dockerisation
+##Construire l’image
 ```bash
 docker build -t mon-utilisateur/Deploiement-App-Django-kubernetes 
 docker run -p 8000:8000 mon-utilisateur/Deploiement-App-Django-kubernetes
 ```
-###Déploiement sur Kubernetes
-####Appliquer les fichiers YAML :
+##Déploiement sur Kubernetes
+##Appliquer les fichiers YAML :
 ```bash
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 kubectl apply -f k8s/ingress.yaml
 ```
-####Vérifier les ressources
+##Vérifier les ressources
 ```bash
 kubectl get pods
 kubectl get services
