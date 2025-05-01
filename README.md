@@ -19,6 +19,7 @@ Une application web de publication développée avec Django, conteneurisée avec
 - Mise a jour category
 
 ## 📁 Structure du projet
+```bash
 ├── Deploiement-App-Django-kubernetes/ 
     ├── manage.py 
     ├── requirements.txt 
@@ -43,7 +44,7 @@ Une application web de publication développée avec Django, conteneurisée avec
         ├── apps.py
         ├── __init__.py
         └── ingress.yaml
-
+```
 ## Installation
 
 ```bash
