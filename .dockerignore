@@ -1,0 +1,35 @@
+# Environnements virtuels
+env/
+venv/
+*.pyc
+__pycache__/
+
+# Fichiers de configuration personnels
+*.env
+*.env.*
+
+# Git
+.git
+.gitignore
+
+# OS & IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Logs et fichiers temporaires
+*.log
+*.sqlite3
+*.swp
+tmp/
+*.bak
+
+# Docker
+.dockerignore
+Dockerfile~
+
+# Tests (optionnel)
+coverage/
+htmlcov/
+.tox/
+.pytest_cache/
