@@ -1,0 +1,25 @@
+# PersistentVolumeClaim pour les données
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: blogpost-pvc-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+      
+---
+#media
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: blogpost-pvc-media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+      

@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: blogpost-backup-daily
+spec:
+  schedule: "0 0 * * *"  # tous les jours à minuit
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: backup
+            image: busybox:1.36
+            command:
+            - /bin/sh
+            - -c
+            - >
+              mkdir -p /backup &&
+              tar -czf /backup/blogpost-backup-$(date +%Y%m%d%H%M%S).tar.gz /data /media &&
+              echo "Backup terminé."
+            volumeMounts:
+            - name: data-volume
+              mountPath: /data
+            - name: media-volume
+              mountPath: /media
+            - name: backup-output
+              mountPath: /backup
+          volumes:
+          - name: data-volume
+            persistentVolumeClaim:
+              claimName: blogpost-pvc-data
+          - name: media-volume
+            persistentVolumeClaim:
+              claimName: blogpost-pvc-media
+          - name: backup-output
+            emptyDir: {}

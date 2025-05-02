@@ -61,8 +61,8 @@ python manage.py runserver
 #### Construire l’image
 
 ```bash
-docker build -t mon-utilisateur/Deploiement-App-Django-kubernetes 
-docker run -p 8000:8000 mon-utilisateur/Deploiement-App-Django-kubernetes
+docker docker build -t blogpost-app:latest .
+docker docker run -p 8000:8000 blogpost-app:latest
 ```
 ### Déploiement sur Kubernetes
 #### Appliquer les fichiers YAML :

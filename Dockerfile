@@ -1,28 +1,35 @@
-FROM ubuntu:latest
+# Utiliser Python 3.13 slim comme image de base
+FROM python:3.13-slim
+
 LABEL authors="mouhamadoumansour"
 
-ENTRYPOINT ["top", "-b"]
-FROM python:3.13-slim
-#Definir les variables d'environnement
+# Définir les variables d'environnement
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-WORKDIR /app
-#Definir les dependances
+
+# Définir le répertoire de travail
+WORKDIR /Deploiement-App-Django-Kubernetes
+
+# Copier le fichier requirements.txt et installer les dépendances
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-#Copy tout le code de L'app
-Copy . .
 
-#Créer un utilisateur non-root pour executer l'application
+# Copier le fichier des variables d'environnement
+COPY .env .env
+
+# Copier le reste du code de l'application
+COPY . .
+
+# Créer un utilisateur non-root pour exécuter l'application
 RUN adduser --disabled-password --gecos "" appuser
-RUN chown -R appuser:appuser /app
+RUN chown -R appuser:appuser /Deploiement-App-Django-Kubernetes
 USER appuser
 
-#Volume pour les donnees persistantes
-VOLUME ["/app/data"]
+# Définir un volume pour les données persistantes
+VOLUME ["/Deploiement-App-Django-Kubernetes/data"]
 
-#Expose le port 8000
+# Exposer le port 8000
 EXPOSE 8000
 
-#Command pour demarrer l'app
-CMD ["gunicorn", "--bin", "0.0.0.0:8000", "Deploiement_App_Django_Kubernetes.wsgi"]
+# Commande pour démarrer l'app avec le serveur de développement Django
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
